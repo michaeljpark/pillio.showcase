@@ -125,7 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('section-research'),
         document.getElementById('section-design'),
         document.getElementById('section-prototyping'),
-        document.getElementById('section-design-pilot')
+        document.getElementById('section-design-pilot'),
+        document.getElementById('section-feedback'),
+        document.getElementById('section-future-developments')
     ];
     const navItems = document.querySelectorAll('.nav-item');
 
