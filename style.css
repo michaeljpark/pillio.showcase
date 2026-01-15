@@ -17,6 +17,47 @@ body {
     padding: 0;
 }
 
+/* Navigation Indicator */
+.nav-indicator {
+    position: fixed;
+    left: 24px; /* Move to left side */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    width: 100px;
+    text-align: left; /* Align text to left */
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start; /* Align items to left */
+}
+
+.nav-item {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500; /* Ensure legibility */
+    font-size: 0.65rem;
+    color: #bbb;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-right: 0;
+    line-height: 1.2;
+}
+
+/* Removed dots */
+
+.nav-item.active {
+    color: #333;
+    font-weight: 700;
+    font-size: 0.65rem;
+}
+
 /* Header */
 header {
     padding: 80px 120px 60px;

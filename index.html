@@ -12,6 +12,15 @@
 </head>
 <body>
 
+    <div class="nav-indicator">
+        <ul class="nav-list">
+            <li class="nav-item" data-target="section-research">Research</li>
+            <li class="nav-item" data-target="section-design">Design</li>
+            <li class="nav-item" data-target="section-prototyping">Prototyping</li>
+            <li class="nav-item" data-target="section-design-pilot">Design Pilot</li>
+        </ul>
+    </div>
+
     <header>
         <img src="logo.svg" alt="Pillio Logo" class="main-logo">
         <div class="header-info">
@@ -46,7 +55,7 @@
         </div>
 
         <!-- Problem Framing -->
-        <div class="showcase-item">
+        <div class="showcase-item" id="section-research">
             <div class="image-container">
                 <img src="ProblemFraming.png" alt="Problem Framing" class="showcase-image">
             </div>
@@ -153,7 +162,7 @@
         </div>
 
         <!-- User Flow -->
-        <div class="showcase-item">
+        <div class="showcase-item" id="section-design">
             <div class="image-container">
                 <img src="userflow.png" alt="User Flow" class="showcase-image">
             </div>
@@ -189,12 +198,18 @@
         </div>
 
         <!-- Digital Layers -->
-        <div class="showcase-item">
+        <div class="showcase-item" id="section-prototyping">
             <div class="image-container">
                 <img src="digitallayers-title.png" alt="Digital Layers" class="showcase-image">
             </div>
             <div class="sub-heading">Digital Layers</div>
             <div class="body">Exploring the digital interface layers.</div>
+        </div>
+
+        <!-- Design Pilot -->
+        <div class="showcase-item" id="section-design-pilot">
+            <div class="sub-heading">Design Pilot</div>
+            <div class="body">Final validation and pilot testing of the design system.</div>
         </div>
     </div>
 

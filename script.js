@@ -119,4 +119,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateSlide();
     }
+
+    // Navigation Indicator Logic
+    const sections = [
+        document.getElementById('section-research'),
+        document.getElementById('section-design'),
+        document.getElementById('section-prototyping'),
+        document.getElementById('section-design-pilot')
+    ];
+    const navItems = document.querySelectorAll('.nav-item');
+
+    function updateNavigation() {
+        const scrollPosition = window.scrollY + window.innerHeight / 3; // Trigger point 1/3 down the screen
+        
+        let currentSectionId = '';
+
+        // Find the current active section
+        // We iterate specifically to find the last section that we have scrolled past
+        sections.forEach(section => {
+            if (section && section.offsetTop <= scrollPosition) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('data-target') === currentSectionId) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Update on scroll
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(updateNavigation);
+    });
+
+    // Update on click
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const targetId = item.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Initial check
+    updateNavigation();
 });
