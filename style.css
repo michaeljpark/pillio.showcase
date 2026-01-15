@@ -267,6 +267,7 @@ footer p {
 }
 
 @media (max-width: 768px) {
+    .nav-indicator { display: none; }
     header { padding: 60px 20px; }
     .main-logo { height: 50px; margin-bottom: 30px; }
     .header-info { flex-direction: column; gap: 30px; }
