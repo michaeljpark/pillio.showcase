@@ -132,6 +132,10 @@ header {
     display: block;
 }
 
+.grayscale-img {
+    filter: grayscale(100%);
+}
+
 .sub-heading {
     font-family: 'Raleway', sans-serif;
     font-size: 2rem;
