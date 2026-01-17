@@ -237,12 +237,18 @@ footer p {
     box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
+.iframe-wrapper.video-wrapper {
+    aspect-ratio: 3 / 4;
+    max-width: 600px;
+}
+
 .media-row {
     display: flex;
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
     width: 100%;
+    align-items: center;
 }
 
 .iframe-wrapper video {
