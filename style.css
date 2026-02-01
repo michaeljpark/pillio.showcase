@@ -20,42 +20,128 @@ body {
 /* Navigation Indicator */
 .nav-indicator {
     position: fixed;
-    left: 24px; /* Move to left side */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1000;
-    width: 100px;
-    text-align: left; /* Align text to left */
+    z-index: 9999; /* Ensure it stays on top */
+    
+    /* Desktop Default: Top Center Pill */
+    left: 50%;
+    top: 24px;
+    transform: translateX(-50%);
+    width: auto;
+    text-align: center;
 }
 
 .nav-list {
+    position: relative; /* Context for absolute positioning */
     list-style: none;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start; /* Align items to left */
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    background: transparent;
+    padding: 5px;
+}
+
+/* Sliding Background Pill */
+.nav-active-bg {
+    position: absolute;
+    background: #E1FF7F;
+    border-radius: 100px;
+    z-index: 1; /* Behind text (text is z-index 2) */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0; /* Hidden initially */
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Mobile: Top Right Vertical */
+@media screen and (max-width: 768px) {
+    .nav-indicator {
+        left: auto !important;
+        right: 20px !important;
+        top: 20px !important;
+        transform: none !important;
+        text-align: right;
+        max-width: none;
+        width: auto;
+        display: block;
+        z-index: 99999; /* Max z-index */
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px; /* Reduced gap */
+        width: auto;
+        margin-left: auto;
+        padding-top: 0;
+        padding-right: 0;
+    }
+
+    .nav-item {
+        color: #333; 
+        font-size: 0.6rem; /* Smaller text */
+        padding: 4px 8px; /* Smaller padding */
+        margin: 0;
+        min-width: auto;
+    }
+    
+    /* Hide the sliding background on mobile if it causes issues, 
+       or style it differently. Keeping it for now but ensuring z-index. */
+    .nav-active-bg {
+        /* Ensure the pill doesn't overflow or look weird in column */
+    }
+
+    /* Fix Header Layout for Mobile */
+    header {
+        padding: 40px 24px; /* Reduced padding */
+    }
+    
+    .showcase {
+        padding: 0 24px 60px;
+    }
+    
+    .header-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .info-right {
+        text-align: left;
+    }
+
+    .showcase-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 .nav-item {
     font-family: 'Raleway', sans-serif;
-    font-weight: 500; /* Ensure legibility */
-    font-size: 0.65rem;
-    color: #bbb;
+    font-weight: 600; 
+    font-size: 0.75rem; 
+    color: #555; 
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease; /* No background transition on item itself */
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: relative;
-    padding-right: 0;
-    line-height: 1.2;
+    padding: 8px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+    z-index: 2; /* Show above the background pill */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Removed dots */
+.nav-item:hover {
+    color: #000;
+}
 
 .nav-item.active {
-    color: #333;
-    font-weight: 700;
-    font-size: 0.65rem;
+    color: #000; 
+    /* background removed, handled by .nav-active-bg */
+    /* box-shadow removed, handled by .nav-active-bg */
 }
 
 /* Header */
@@ -291,8 +377,8 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    .nav-indicator { display: none; }
-    header { padding: 60px 20px; }
+    /* .nav-indicator { display: none; }  Removed to show nav */
+    header { padding: 40px 20px !important; } /* Force reduced padding */
     .main-logo { height: 50px; margin-bottom: 30px; }
     .header-info { flex-direction: column; gap: 30px; }
     .info-right { text-align: left; }
@@ -300,4 +386,89 @@ footer p {
     .showcase-row { grid-template-columns: 1fr; }
     .iframe-wrapper { aspect-ratio: 1 / 2; }
     .scroll-slideshow-sticky { padding: 0 20px; }
+}
+
+/* View Report Button */
+.view-report-btn {
+    position: fixed;
+    top: 32px;
+    right: 50px;
+    z-index: 1001; /* Higher than nav */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #333;
+    cursor: pointer;
+    text-decoration: underline;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 5px; /* Minimal padding for hover effect */
+    background: transparent;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.view-report-btn:hover {
+    color: #000;
+    background: #E1FF7F;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Report Modal */
+.report-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Click anywhere to close */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.report-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.report-content {
+    max-width: 90%;
+    max-height: 90vh;
+    position: relative;
+    cursor: default; /* Prevent click bubbling from image */
+}
+
+.report-content img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    display: block;
+}
+
+/* Mobile styles for View Report */
+@media screen and (max-width: 768px) {
+    .view-report-btn {
+        top: auto;
+        right: auto;
+        bottom: 24px;
+        left: 24px;
+        /* Restore pill style */
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-radius: 100px;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 0.75rem;
+        backdrop-filter: none;
+        text-shadow: none;
+    }
 }
