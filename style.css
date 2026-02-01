@@ -402,15 +402,15 @@ footer p {
     text-decoration: underline;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 2px 5px; /* Minimal padding for hover effect */
+    padding: 8px 24px; /* Increased padding for pill shape */
     background: transparent;
-    border-radius: 4px;
+    border-radius: 100px; /* Full pill shape */
     transition: all 0.3s ease;
 }
 
 .view-report-btn:hover {
     color: #000;
-    background: #E1FF7F;
+    background: #ffffff;
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
